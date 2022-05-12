@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Test2
 {
@@ -24,9 +26,12 @@ namespace Test2
         public MainWindow()
         {
             InitializeComponent();
-            string path1 = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Andronet\\source\\repos\\Test2\\Test2\\TestDB.mdf;Integrated Security=True";
-            string path2 = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\WorkPlace\\source\\repos\\Test2\\Test2\\TestDB.mdf;Integrated Security=True";
-            var controller = new Controller(path1);
+        }
+        private void LoadDataBase()
+        {
+            var openfile = new ChooseDataBase();
+            openfile.Title = "Input Path to DataBase";
+            openfile.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,7 +42,7 @@ namespace Test2
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Controller.instance?.LoadDataBase();
+            LoadDataBase();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
